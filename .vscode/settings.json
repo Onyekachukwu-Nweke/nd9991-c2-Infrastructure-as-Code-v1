@@ -3,6 +3,10 @@
         "https://json.schemastore.org/yamllint.json": [
             "file:///home/m3gatron/Documents/alx-t/nd9991-c2-Infrastructure-as-Code-v1/supporting_material/testcfn.yml",
             "file:///home/m3gatron/Documents/alx-t/nd9991-c2-Infrastructure-as-Code-v1/solutions/challenge1-solution.yml"
-        ]
+        ],
+        "https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/ansible.json#/$defs/playbook": [
+            "file:///home/m3gatron/Documents/alx-t/nd9991-c2-Infrastructure-as-Code-v1/supporting_material/servers.yml"
+        ],
+        "https://json.schemastore.org/travis.json": "file:///home/m3gatron/Documents/alx-t/nd9991-c2-Infrastructure-as-Code-v1/supporting_material/demoservers.yml"
     }
 }
