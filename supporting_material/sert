@@ -1,0 +1,51 @@
+#!/bin/bash
+sudo apt update -y
+sudo apt install -y --no-install-recommends php8.1
+sudo apt-get install -y php8.1-cli php8.1-common php8.1-mysql php8.1-zip php8.1-gd php8.1-mbstring php8.1-curl php8.1-xml php8.1-bcmath php8.1-fpm
+sudo systemctl reload php8.1-fpm
+git clone https://github.com/Onyekachukwu-Nweke/server_stats_template.git
+sudo apt install -y nginx
+sudo mv server_stats_template/assets /var/www/html/
+sudo mv server_stats_template/index.php /var/www/html/
+git clone https://github.com/Onyekachukwu-Nweke/Alt-School-Sem3-Holiday-Project.git
+sudo cat Alt-School-Sem3-Holiday-Project/nginx | sudo tee /etc/nginx/sites-available/default
+# sudo sed -i "/location/s/^#//g" /etc/nginx/sites-available/default
+# sudo sed -i "/fastcgi-php/s/^#//g" /etc/nginx/sites-available/default
+# sudo sed -i "/unix/s/^#//g" /etc/nginx/sites-available/default
+# sudo sed -i "/Deny/s/^#//g" /etc/nginx/sites-available/default
+# sudo sed -i "/}/s/^#//g" /etc/nginx/sites-available/default
+# sudo sed '60 s/7.4/8.1/' /etc/nginx/sites-available/default
+# sudo sed 's/<index.html>/& index.php/' /etc/nginx/sites-available/default
+sudo mv /var/www/html/index.nginx-debian.html ../
+sudo systemctl reload php8.1-fpm
+sudo systemctl restart nginx
+
+
+"server {
+        listen 80 default_server;
+        listen [::]:80 default_server;
+
+        root /var/www/html;
+
+        # Add index.php to the list if you are using PHP
+        index index.php index.html index.htm index.nginx-debian.html;
+
+        server_name _;
+
+        location / {
+                # First attempt to serve request as file, then
+                # as directory, then fall back to displaying a 404.
+                try_files $uri $uri/ =404;
+                
+        # pass PHP scripts to FastCGI server
+        #
+        location ~ \.php$ {
+                include snippets/fastcgi-php.conf;
+        
+                fastcgi_pass unix:/run/php/php8.1-fpm.sock;
+        }
+
+        location ~ /\.ht {
+                deny all;
+        }
+}"
